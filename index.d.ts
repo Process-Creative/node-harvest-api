@@ -1,4 +1,4 @@
-interface IHarvestUser {
+export interface IHarvestUser {
   id:number;
   first_name:string;
   last_name:string;
@@ -22,7 +22,7 @@ interface IHarvestUser {
   avatar_url:string;
 }
 
-interface IHarvestTimeEntry {
+export interface IHarvestTimeEntry {
   id:number;
   spent_date:string;
   hours:number;
@@ -79,7 +79,7 @@ interface IHarvestTimeEntry {
   } | null;
 }
 
-interface IHarvestTask {
+export interface IHarvestTask {
   id:                  number;
   name:                string;
   billable_by_default: boolean;
@@ -90,7 +90,7 @@ interface IHarvestTask {
   updated_at:          string;
 }
 
-interface IHarvestRole {
+export interface IHarvestRole {
   id:         number;
   name:       string;
   created_at: string;
@@ -98,7 +98,7 @@ interface IHarvestRole {
   user_ids:   number[];
 }
 
-interface IHarvestProject {
+export interface IHarvestProject {
   id:                                  number;
   name:                                string;
   code:                                string;
@@ -125,13 +125,13 @@ interface IHarvestProject {
   client:                              IHarvestProjectClient;
 }
 
-interface IHarvestProjectClient {
+export interface IHarvestProjectClient {
   id:       number;
   name:     string;
   currency: string;
 }
 
-interface IHarvestInvoiceItemCategory {
+export interface IHarvestInvoiceItemCategory {
   id:             number;
   name:           string;
   use_as_service: boolean;
@@ -140,7 +140,7 @@ interface IHarvestInvoiceItemCategory {
   updated_at:     string;
 }
 
-interface IHarvestInvoice {
+export interface IHarvestInvoice {
   id:                   number;
   client_key:           string;
   number:               string;
@@ -176,12 +176,12 @@ interface IHarvestInvoice {
   line_items:           IHarvestInvoiceLineItem[];
 }
 
-interface IHarvestInvoiceClient {
+export interface IHarvestInvoiceClient {
   id:   number;
   name: string;
 }
 
-interface IHarvestInvoiceLineItem {
+export interface IHarvestInvoiceLineItem {
   id:          number;
   kind:        string;
   description: string;
@@ -194,14 +194,14 @@ interface IHarvestInvoiceLineItem {
 }
 
 
-interface IHarvestEstimateItemCategory {
+export interface IHarvestEstimateItemCategory {
   id:number;
   name:string;
   created_at:string;
   updated_at:string;
 }
 
-interface IHarvestEstimate {
+export interface IHarvestEstimate {
   id:              number;
   client_key:      string;
   number:          string;
@@ -228,12 +228,12 @@ interface IHarvestEstimate {
   line_items:      IHarvestEstimateLineItem[];
 }
 
-interface IHarvestEstimateClient {
+export interface IHarvestEstimateClient {
   id:number;
   name:string;
 }
 
-interface IHarvestEstimateLineItem {
+export interface IHarvestEstimateLineItem {
   id:          number;
   kind:        string;
   description: string;
@@ -244,7 +244,7 @@ interface IHarvestEstimateLineItem {
   taxed2:      boolean;
 }
 
-interface IHarvestContact {
+export interface IHarvestContact {
   id:number;
   title:string;
   first_name:string;
@@ -261,7 +261,7 @@ interface IHarvestContact {
   }
 }
 
-interface IHarvestClient {
+export interface IHarvestClient {
   id:number;
   name:string;
   is_active:boolean;
@@ -273,19 +273,19 @@ interface IHarvestClient {
 }
 
 
-type HarvestGetParams = {
+export type HarvestGetParams = {
   page?:number;
   per_page?:number;
 }
 
-type HarvestFunctionSet<T> = {
+export type HarvestFunctionSet<T> = {
   find:(id:number)=>Promise<T>;
   all:()=>Promise<T[]>;
   get:(params?:HarvestGetParams)=>Promise<T[]>;
 }
 
 // For easy definition mapping
-interface IHarvestKeyMap {
+export interface IHarvestKeyMap {
   users:IHarvestUser;
   time_entries:IHarvestTimeEntry;
   clients:IHarvestClient;
@@ -299,7 +299,7 @@ interface IHarvestKeyMap {
   tasks:IHarvestTask;
 }
 
-type IHarvest = {
+export type IHarvest = {
   [K in keyof IHarvestKeyMap]:HarvestFunctionSet<IHarvestKeyMap[K]>;
 }
 
@@ -321,4 +321,4 @@ declare class Harvest implements IHarvest {
   tasks: HarvestFunctionSet<IHarvestTask>
 }
 
-export = Harvest
+export default Harvest
