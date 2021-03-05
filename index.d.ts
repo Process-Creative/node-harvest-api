@@ -284,20 +284,41 @@ type HarvestFunctionSet<T> = {
   get:(params?:HarvestGetParams)=>Promise<T[]>;
 }
 
-declare class Harvest {
-  constructor(account:string, token:string, name:string);
+// For easy definition mapping
+interface IHarvestKeyMap {
+  users:IHarvestUser;
+  time_entries:IHarvestTimeEntry;
+  clients:IHarvestClient;
+  contacts:IHarvestContact;
+  estimate_item_categories:IHarvestEstimateItemCategory;
+  estimates:IHarvestEstimate;
+  invoice_item_categories:IHarvestInvoiceItemCategory;
+  invoices:IHarvestInvoice;
+  projects:IHarvestProject;
+  roles:IHarvestRole;
+  tasks:IHarvestTask;
+}
 
-  users:HarvestFunctionSet<IHarvestUser>;
-  time_entries:HarvestFunctionSet<IHarvestTimeEntry>;
-  clients:HarvestFunctionSet<IHarvestClient>;
-  contacts:HarvestFunctionSet<IHarvestContact>;
-  estimate_item_categories:HarvestFunctionSet<IHarvestEstimateItemCategory>;
-  estimates:HarvestFunctionSet<IHarvestEstimate>;
-  invoice_item_categories:HarvestFunctionSet<IHarvestInvoiceItemCategory>;
-  invoices:HarvestFunctionSet<IHarvestInvoice>;
-  projects:HarvestFunctionSet<IHarvestProject>;
-  roles:HarvestFunctionSet<IHarvestRole>;
-  tasks:HarvestFunctionSet<IHarvestTask>;
+type IHarvest = {
+  [K in keyof IHarvestKeyMap]:HarvestFunctionSet<IHarvestKeyMap[K]>;
+}
+
+declare class Harvest implements IHarvest {
+  constructor (account:string, token:string, name:string);
+
+
+
+  users: HarvestFunctionSet<IHarvestUser>
+  time_entries: HarvestFunctionSet<IHarvestTimeEntry>
+  clients: HarvestFunctionSet<IHarvestClient>
+  contacts: HarvestFunctionSet<IHarvestContact>
+  estimate_item_categories: HarvestFunctionSet<IHarvestEstimateItemCategory>
+  estimates: HarvestFunctionSet<IHarvestEstimate>
+  invoice_item_categories: HarvestFunctionSet<IHarvestInvoiceItemCategory>
+  invoices: HarvestFunctionSet<IHarvestInvoice>
+  projects: HarvestFunctionSet<IHarvestProject>
+  roles: HarvestFunctionSet<IHarvestRole>
+  tasks: HarvestFunctionSet<IHarvestTask>
 }
 
 export = Harvest
