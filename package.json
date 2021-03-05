@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/maneuver-agency/node-harvest-api"
+    "url": "https://github.com/process-creative/node-harvest-api"
   },
   "author": "David De Coninck",
   "license": "MIT",
