@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- 14.6.0
+cache:
+  yarn: true
+  directories:
+  - node_modules
+install:
+- npm install -g yarn
+- npm run bootstrap
+script:
+- yarn test
+before_deploy:
+- yarn tsc
+deploy:
+  provider: script
+  script: bash .travis/deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+env:
+  global:
+    secure: j96n80wDO9VB9yFI91z221u61sQCiqcym3w6KXn/8axr59wDSpQTGqlF6RNW2JqDAZ5oqYXpqwbyY+EAgh6bsYwABL1ruqCK9KvJfphzJagcmgFCtdYnYmTRd/a9xPOQSAopztyzRVNPFg7rOXE9nK4OdXvtVRMdpycIX50C/Hm8WNwn8DzlQE9c0V8oqez4MKXWoAAMxNmkAezW9kOm12PCEeoujkW94rhRWRH0sPHd2MEFCfPPiqbMDzpB5HGzVlBiP8CkLQ1E9hf9YSLfehlgdUwOAFqGaiSoRKpjktYNLg2wx6jxbH2wl6yHYXjBHc5JmW4l8XiW1J6yqlxFdo3oMTPbHbfk/DW7EFHTy8eHH4151euIcun/QJ1G+abmVqOnus1qhBDGAK9ZD5yVcc19bx92Y8M73jIAI0dxOsMeITR7FvOWgbGpEQsQI0HPMDW9UiAgT4mjEqTAcoSFwuXjORR4QW13VSs0t3CMcV/gXxkZVNdqu8t9SGl4xTRJHzS+9nwKQcLp9hizDR9NZfI1Nt/+CixDMnnDEFm3XOswlp934eV0GwnYuvOOQNcbDU+8i6E72DJpGG0qHKTUqjSRWgpODv93Geold1GPh2QS9gXWaCx4qDLeL9S/GfbyEHKs//zsIY+uCWvRSN87kWZeDSCHh+99OxfpioFsIxI=
