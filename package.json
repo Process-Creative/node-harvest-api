@@ -4,7 +4,7 @@
   "description": "Node implementation for the Harvest rest API v2 using async/await",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require babel-register"
+    "test": "echo \"No tests defined\""
   },
   "keywords": [
     "node",
