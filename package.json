@@ -1,6 +1,6 @@
 {
   "name": "@process-creative/node-harvest-api",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Node implementation for the Harvest rest API v2 using async/await",
   "main": "index.js",
   "scripts": {
