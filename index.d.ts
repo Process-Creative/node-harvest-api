@@ -1,4 +1,4 @@
-export interface IHarvestUser {
+interface IHarvestUser {
   id:number;
   first_name:string;
   last_name:string;
@@ -22,7 +22,7 @@ export interface IHarvestUser {
   avatar_url:string;
 }
 
-export interface IHarvestTimeEntry {
+interface IHarvestTimeEntry {
   id:number;
   spent_date:string;
   hours:number;
@@ -79,7 +79,7 @@ export interface IHarvestTimeEntry {
   } | null;
 }
 
-export interface IHarvestTask {
+interface IHarvestTask {
   id:                  number;
   name:                string;
   billable_by_default: boolean;
@@ -90,7 +90,7 @@ export interface IHarvestTask {
   updated_at:          string;
 }
 
-export interface IHarvestRole {
+interface IHarvestRole {
   id:         number;
   name:       string;
   created_at: string;
@@ -98,7 +98,7 @@ export interface IHarvestRole {
   user_ids:   number[];
 }
 
-export interface IHarvestProject {
+interface IHarvestProject {
   id:                                  number;
   name:                                string;
   code:                                string;
@@ -131,7 +131,7 @@ interface IHarvestProjectClient {
   currency: string;
 }
 
-export interface IHarvestInvoiceItemCategory {
+interface IHarvestInvoiceItemCategory {
   id:             number;
   name:           string;
   use_as_service: boolean;
@@ -140,7 +140,7 @@ export interface IHarvestInvoiceItemCategory {
   updated_at:     string;
 }
 
-export interface IHarvestInvoice {
+interface IHarvestInvoice {
   id:                   number;
   client_key:           string;
   number:               string;
@@ -194,14 +194,14 @@ interface IHarvestInvoiceLineItem {
 }
 
 
-export interface IHarvestEstimateItemCategory {
+interface IHarvestEstimateItemCategory {
   id:number;
   name:string;
   created_at:string;
   updated_at:string;
 }
 
-export interface IHarvestEstimate {
+interface IHarvestEstimate {
   id:              number;
   client_key:      string;
   number:          string;
@@ -244,7 +244,7 @@ interface IHarvestEstimateLineItem {
   taxed2:      boolean;
 }
 
-export interface IHarvestContact {
+interface IHarvestContact {
   id:number;
   title:string;
   first_name:string;
@@ -261,7 +261,7 @@ export interface IHarvestContact {
   }
 }
 
-export interface IHarvestClient {
+interface IHarvestClient {
   id:number;
   name:string;
   is_active:boolean;
@@ -284,7 +284,9 @@ type HarvestFunctionSet<T> = {
   get:(params?:HarvestGetParams)=>Promise<T[]>;
 }
 
-export interface IHarvest {
+declare class Harvest {
+  constructor(account:string, token:string, name:string);
+
   users:HarvestFunctionSet<IHarvestUser>;
   time_entries:HarvestFunctionSet<IHarvestTimeEntry>;
   clients:HarvestFunctionSet<IHarvestClient>;
@@ -298,4 +300,4 @@ export interface IHarvest {
   tasks:HarvestFunctionSet<IHarvestTask>;
 }
 
-export default IHarvest;
+export = Harvest
